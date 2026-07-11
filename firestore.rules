@@ -1,0 +1,37 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // For this prototype, we'll allow open read access and authenticated write access.
+    // In a full production environment, write access to tournaments, settings, and rooms
+    // should be restricted using Custom Claims for admins.
+
+    match /settings/{document=**} {
+      allow read: if true;
+      allow write: if true; // Admin writes this in dashboard
+    }
+    
+    match /tournaments/{document=**} {
+      allow read: if true;
+      allow write: if true; // Admin writes this in dashboard
+    }
+
+    match /players/{userId} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.uid == userId || true;
+    }
+    
+    match /requests/{document=**} {
+      allow read: if true;
+      allow write: if true;
+    }
+    
+    match /rooms/{document=**} {
+      allow read: if true;
+      allow write: if true;
+    }
+    
+    match /{document=**} {
+      allow read, write: if true;
+    }
+  }
+}

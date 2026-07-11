@@ -1,0 +1,8 @@
+{
+  "name": "RDX Tournament Manager",
+  "description": "A modern, dark-themed tournament management application.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
